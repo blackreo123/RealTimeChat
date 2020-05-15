@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="global.sesoc.realtimechat.ChatMapper">
+	<select id="getChatList" parameterType="String" resultType="Chat">
+		select * from chat
+		where chatTime > #{nowTime}
+		order by chatTime
+	</select>
+	
+	<insert id="insertChat" parameterType="map">
+		insert into chat
+		values(
+			#{chatName}
+			,#{chatContent}
+			,sysdate
+		)
+		
+	</insert>
+</mapper>
