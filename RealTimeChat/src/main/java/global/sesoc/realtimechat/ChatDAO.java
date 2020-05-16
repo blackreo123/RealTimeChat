@@ -12,10 +12,10 @@ public class ChatDAO {
 	@Autowired
 	SqlSession session;
 	
-	public ArrayList<Chat> getChatList(String nowTime){
+	public ArrayList<Chat> getChatList(){
 		ArrayList<Chat>getChatList=null;
 		ChatMapper mapper = session.getMapper(ChatMapper.class);
-		getChatList=mapper.getChatList(nowTime);
+		getChatList=mapper.getChatList();
 		return getChatList;
 	}
 	

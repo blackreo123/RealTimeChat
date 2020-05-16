@@ -12,24 +12,50 @@
 <script type="text/javascript">
 $(function(){
 	init();
+	getmugen();
 })
 
 function init(){
-	var 
+	$.ajax({
+		type : "get"
+		,url: "getList"
+		,success: showList
+		})
 }
-</script>
-<script type="text/javascript">
- function submitFunction(){
-		var chatName=$("#chatName").val();
-		var chatContent=$("#chatContent").val();
-		$.ajax({
-			type : "post",
-			url: "submit",
-			data : {"chatName":chatName, "chatContent":chatContent}
-			});
-		$("#chatContent").val('');
-	 }
-</script>
+function getmugen(){
+	setInterval(function(){
+		init();},500)
+}
+function showList(resp){
+	
+	var data='';
+	$.each(resp, function(index,item){
+		data +='<div class="row">';
+		data +='<div class="col-lg-12">';
+		data +='<div class="media">';
+		data +='<a class="pull-left" href="#"> <img class="media-object img-circle" src="resources/images/icon.jpeg"></a>';
+		data +='<div class="media-body">';
+		data +='<h4 class="media-heading">'+item.chatName+'<span class="small pull-right">'+item.chatTime+'</span></h4>';
+		data +='</div>';
+		data +='<p>'+item.chatContent+'</p>';
+		data +='</div></div></div><hr>';
+		})
+	$("#listHere").html(data);
+	
+}
+function submitFunction(){
+	var chatName=$("#chatName").val();
+	var chatContent=$("#chatContent").val();
+	$.ajax({
+		type : "post",
+		url: "submit",
+		data : {"chatName":chatName, "chatContent":chatContent},
+		success: init
+		});
+	$("#SC").scrollTop($("#SC")[0].scrollHeight);
+	$("#chatContent").val('');
+ }
+</script>							
 <title>실시간 익명 채팅</title>
 </head>
 <body>
@@ -47,30 +73,15 @@ function init(){
 							<div class="clearfix"></div>
 						</div>
 						<div id="chat" class="panel-collapse collapse in">
-							<div class="portlet-body chat widget"
-								style="overflow-y: auto; width: auto; height: 300px;">
+							<div id="SC" class="portlet-body chat widget"
+								style="overflow-y: auto; width: auto; height: 700px;">
 								<div class="row">
 									<div class="col-lg-12">
 										<p class="text-center text-muted small">2020.05.14</p>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="media">
-											<a class="pull-left" href="#"> <img
-												class="media-object img-circle"
-												src="resources/images/icon.jpeg">
-											</a>
-											<div class="media-body">
-												<h4 class="media-heading">
-													윤지하 <span class="small pull-right">오후 9시 30분</span>
-												</h4>
-											</div>
-											<p>안녕 난 윤지하</p>
-										</div>
-									</div>
-								</div>
-								<hr>
+								<div id="listHere"></div>
+								
 							</div>
 							<div class="portlet-footer">
 								<div class="row">

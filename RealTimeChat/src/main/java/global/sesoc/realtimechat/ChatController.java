@@ -22,8 +22,8 @@ public class ChatController {
 	
 	@GetMapping("getList")
 	@ResponseBody
-	public ArrayList<Chat> getList(String nowTime) {
-		ArrayList<Chat> chatList = dao.getChatList(nowTime);
+	public ArrayList<Chat> getList() {
+		ArrayList<Chat> chatList = dao.getChatList();
 		return chatList;
 	}
 	
