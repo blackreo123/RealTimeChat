@@ -13,6 +13,8 @@
 $(function(){
 	init();
 	getmugen();
+	var jikan=new Date().toISOString().substring(0,10);
+	$("#jikan").html(jikan);
 })
 
 function init(){
@@ -55,7 +57,7 @@ function submitFunction(){
 	$("#SC").scrollTop($("#SC")[0].scrollHeight);
 	$("#chatContent").val('');
  }
-</script>							
+</script>	
 <title>실시간 익명 채팅</title>
 </head>
 <body>
@@ -77,7 +79,7 @@ function submitFunction(){
 								style="overflow-y: auto; width: auto; height: 700px;">
 								<div class="row">
 									<div class="col-lg-12">
-										<p class="text-center text-muted small">2020.05.14</p>
+										<p class="text-center text-muted small" id="jikan"></p>
 									</div>
 								</div>
 								<div id="listHere"></div>
